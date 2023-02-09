@@ -5,27 +5,42 @@ import (
 	"testing"
 )
 
-/*
-*
-	Mal for TestGetFunFacts funksjonen.
-	Definer korrekte typer for input og want,
-	og sette korrekte testverdier i slice tests.
-*/
 func TestGetFunFacts(t *testing.T) {
-	type test struct {
-		input // her må du skrive riktig type for input
-		want  // her må du skrive riktig type for returverdien
+	expectedSunFacts := []string{
+		"Temperatur i Solens kjerne	15 000 000C°",
+    	"Temperatur på ytre lag av Solen	5778K",
 	}
 
-	// Her må du legge inn korrekte testverdier
-	//tests := []test{
-	//  {input: , want: },
-	//}
+	sunFacts := GetFunFacts("Sun")
+	if !reflect.DeepEqual(sunFacts, expectedSunFacts) {
+		t.Errorf("Expected %v, but got %v", expectedSunFacts, sunFacts)
+	}
 
-	for _, tc := range tests {
-		got := GetFunFacts(tc.input)
-		if !reflect.DeepEqual(tc.want, got) {
-			t.Errorf("expected: %v, got: %v", tc.want, got)
-		}
+	expectedLunaFacts := []string{
+		"Temperatur på Månens overflate om natten	-183°C",
+    	"Temperatur på Månens overflate om dagen",
+	}
+
+	lunaFacts := GetFunFacts("Luna")
+	if !reflect.DeepEqual(lunaFacts, expectedLunaFacts) {
+		t.Errorf("Expected %v, but got %v", expectedLunaFacts, lunaFacts)
+	}
+
+	expectedTerraFacts := []string{
+		"Høyeste temperatur målt på Jordens overflate	56.7°C",
+    	"Laveste temperatur målt på Jordens overflate	-89,4°C",
+    	"Temperatur i Jordens indre kjerne	9392K",
+	}
+
+	terraFacts := GetFunFacts("Terra")
+	if !reflect.DeepEqual(terraFacts, expectedTerraFacts) {
+		t.Errorf("Expected %v, but got %v", expectedTerraFacts, terraFacts)
+	}
+
+	expectedDefaultFacts := []string{"Ingen fun facts funnet"}
+
+	defaultFacts := GetFunFacts("unknown")
+	if !reflect.DeepEqual(defaultFacts, expectedDefaultFacts) {
+		t.Errorf("Expected %v, but got %v", expectedDefaultFacts, defaultFacts)
 	}
 }
