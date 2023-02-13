@@ -30,7 +30,7 @@ func init() {
 
 	// Definerer og initialiserer flagg-variablene
 	flag.Float64Var(&Fahrenheit, "F", 0.0, "temperatur i grader fahrenheit")
-	flag.Float64Var(&Kelvin, "K", 1, "temperatur i grader Kelvin")
+	flag.Float64Var(&Kelvin, "K", 0.0, "temperatur i grader Kelvin")
 	flag.Float64Var(&Celsius, "C", 0.0, "temperatur i grader Celsius")
 	// Du må selv definere flag-variablene for "C" og "K"
 	flag.StringVar(&out, "out", "C", "beregne temperatur i C - celsius, F - farhenheit, K- Kelvin")
@@ -44,25 +44,24 @@ func init() {
 func main() {
 	flag.Parse()
 
-
 	if isFlagPassed("F") && out == "C" {
 		Celsius = conv.FahrenheitToCelsius(Fahrenheit)
-		fmt.Println(Fahrenheit, "°F er", Celsius, "°C")
+		fmt.Printf("%.2f°F er %.2f°C\n", Fahrenheit, Celsius)
 	} else if isFlagPassed("C") && out == "F" {
 		Fahrenheit = conv.CelsiusToFahrenheit(Celsius)
-		fmt.Println(Celsius, "°C er", Fahrenheit, "°F")
+		fmt.Printf("%.2f°C er %.2f°F\n", Celsius, Fahrenheit)
 	} else if isFlagPassed("C") && out == "K" {
 		Kelvin = conv.CelsiusToKelvin(Celsius)
-		fmt.Println(Celsius, "°C er", Kelvin, "K")
+		fmt.Printf("%.2f°C er %.2fK\n", Celsius, Kelvin)
 	} else if isFlagPassed("K") && out == "C" {
 		Celsius = conv.KelvinToCelsius(Kelvin)
-		fmt.Println(Kelvin, "K er", Celsius, "°C")
+		fmt.Printf("%.2fK er %.2f°C\n", Kelvin, Celsius)
 	} else if isFlagPassed("K") && out == "F" {
 		Fahrenheit = conv.KelvinToFahrenheit(Kelvin)
-		fmt.Println(Kelvin, "K er", Fahrenheit, "°F")
+		fmt.Printf("%.2fK er %.2f°F\n", Kelvin, Fahrenheit)
 	} else if isFlagPassed("F") && out == "K" {
 		Kelvin = conv.FahrenheitToKelvin(Fahrenheit)
-		fmt.Println(Fahrenheit, "°F er", Kelvin, "K")
+		fmt.Printf("%.2f°F er %.2fK\n", Fahrenheit, Kelvin)
 	} else if isFlagPassed("funfacts") && isFlagPassed("t") && t == "C" {
 		facts := funfacts.GetFunFacts(funfact)
 		for i, fact := range facts {
