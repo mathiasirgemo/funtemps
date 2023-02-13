@@ -37,7 +37,7 @@ func TestGetFunFacts(t *testing.T) {
 		t.Errorf("Expected %v, but got %v", expectedTerraFacts, terraFacts)
 	}
 
-	expectedDefaultFacts := []string{"Ingen fun facts funnet"}
+	expectedDefaultFacts := []string{"Ingen funfacts funnet.."}
 
 	defaultFacts := GetFunFacts("unknown")
 	if !reflect.DeepEqual(defaultFacts, expectedDefaultFacts) {
